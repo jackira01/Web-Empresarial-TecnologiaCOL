@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ──────────────────────────────────────────────────── */
+/* ─── Lenis smooth scroll ────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    overflow-x: hidden;
+  }
+  body {
+    @apply bg-surface text-on-surface font-body;
+  }
+  ::selection {
+    @apply bg-primary-container text-on-primary-container;
+  }
+}
+
+/* ─── Utilities ──────────────────────────────────────────────── */
+@layer utilities {
+  /* Scrollbar oculta — requiere prefijos de vendor, no expresable con @apply */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Gradiente radial complejo — no soportado como clase Tailwind nativa */
+  .hero-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, #31394d 0%, #0b1326 70%);
+    background-size: 100% 150%;
+    @apply animate-ambientShift;
+  }
+
+  /* text-shadow no es utilidad nativa de Tailwind */
+  .text-glow {
+    text-shadow: 0 0 40px rgba(187, 195, 255, 0.2);
+  }
+}
+
+/* ─── Components ─────────────────────────────────────────────── */
+@layer components {
+  /* Glassmorphism base */
+  .glass {
+    @apply bg-surface-container-high/60 backdrop-blur-[20px];
+    -webkit-backdrop-filter: blur(20px); /* prefijo vendor necesario */
+  }
+
+  /* Glass Monolith */
+  .glass-monolith {
+    @apply bg-surface-variant/30 backdrop-blur-[20px] border-t border-outline-variant/15;
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Scroll reveal — estados manejados por JS (IntersectionObserver) */
+  .reveal {
+    @apply opacity-0 translate-y-5 transition-[opacity,transform] duration-[400ms] ease-[cubic-bezier(0.165,0.84,0.44,1)];
+  }
+  .reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Pop scale reveal */
+  .reveal-pop {
+    @apply opacity-0 scale-[0.8] transition-[opacity,transform] duration-[400ms] ease-[cubic-bezier(0.165,0.84,0.44,1)];
+  }
+  .reveal-pop.is-visible {
+    @apply opacity-100 scale-100;
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    @apply bg-primary-container text-on-primary-container font-bold rounded-full
+           transition-all duration-300 active:scale-95;
+    box-shadow: 0 0 20px rgba(187, 195, 255, 0.15);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(60, 89, 253, 0.4);
+    filter: brightness(1.1);
+  }
+
+  /* Glass CTA button */
+  .btn-glass {
+    @apply bg-surface-variant/40 backdrop-blur-md text-on-surface font-semibold
+           rounded-full border border-outline-variant/20 transition-all duration-300 active:scale-95;
+  }
+  .btn-glass:hover {
+    @apply bg-surface-variant/60;
+  }
+
+  /* Service card */
+  .service-card {
+    @apply bg-surface-container-low rounded-xl relative overflow-hidden transition-all duration-500;
+    min-height: 200px;
+  }
+  @media (min-width: 768px) {
+    .service-card {
+      min-height: 0;
+    }
+  }
+  .service-card:hover {
+    @apply bg-surface-container-high -translate-y-[5px];
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Nav scrolled state */
+  .nav-scrolled {
+    box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Icon rotate on group hover */
+  .group:hover .icon-rotate {
+    animation: iconRotate 300ms cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+}
+
+/* ─── Vue Transition: Portfolio slider ───────────────────────── */
+/* Los nombres de clase de transición de Vue (.slide-fwd-enter-from, etc.)
+   son generados por el framework y no pueden expresarse como utilidades en el template */
+.slide-fwd-enter-active,
+.slide-fwd-leave-active,
+.slide-bwd-enter-active,
+.slide-bwd-leave-active {
+  @apply transition-all duration-[350ms] ease-[cubic-bezier(0.165,0.84,0.44,1)];
+}
+.slide-fwd-enter-from { @apply opacity-0 translate-x-[50px]; }
+.slide-fwd-leave-to   { @apply opacity-0 -translate-x-[50px]; }
+.slide-bwd-enter-from { @apply opacity-0 -translate-x-[50px]; }
+.slide-bwd-leave-to   { @apply opacity-0 translate-x-[50px]; }
+
+/* ─── Keyframes referenciados desde @layer components ─────────── */
+@keyframes iconRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(15deg); }
+}

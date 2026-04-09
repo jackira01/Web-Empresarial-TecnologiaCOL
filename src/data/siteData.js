@@ -2,7 +2,7 @@ export const contact = {
   email: 'tecnologiacol03@gmail.com',
   phone: {
     /** Valor para el href tel: */
-    raw: '+573025336266',
+    raw: '+573237242744',
     /** Valor visible en pantalla */
     display: '+57 (323) 724-2744',
   },

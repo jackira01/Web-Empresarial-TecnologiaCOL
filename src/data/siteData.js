@@ -89,7 +89,7 @@ export const projects = [
       'https://res.cloudinary.com/dqojdssac/image/upload/v1770765724/Screenshot_2026-02-10_182123_jajg0z.png',
     ],
     tags: ['Next.js', 'Redux', 'Node.js', 'Bootstrap'],
-    url: 'https://fisiom-front.vercel.app',
+    url: 'https://fisiofullness.vercel.app/',
     active: true,
   },
 ]

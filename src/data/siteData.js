@@ -21,7 +21,7 @@ export const projects = [
     video:
       'https://res.cloudinary.com/dqojdssac/video/upload/v1775148727/2026-04-02_11-41-03_z81ecd.mp4',
     tags: ['Vue.js', 'TailwindCss', 'Motion', 'Single Page', 'N8N'],
-    url: 'https://arisexr.vercel.app/',
+    url: 'https://arisexr.lol',
     active: true,
   },
   {
@@ -49,7 +49,7 @@ export const projects = [
     video:
       'https://res.cloudinary.com/dqojdssac/video/upload/v1775196472/2026-04-03_01-06-50_lxth3u.mp4',
     tags: ['Wordpress', 'Elementor', 'WooCommerce'],
-    url: 'https://coopinem.com.co/',
+    url: 'https://coopinem.com.co',
     active: true,
   },
   {
